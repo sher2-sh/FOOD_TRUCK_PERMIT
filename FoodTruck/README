@@ -1,0 +1,77 @@
+This project is to help San Francisco Vandors with what types of food truck they needed
+when starting a new business, also what type of foods other vandors are selling at the time
+to get new vandors ideas of what kinds of food they will consider selling to stay in the food truck business. Know how many different food type each vandors sell.
+
+San Francisco dataset :  Mobile_Food_Facility_Permit_20250317.csv
+
+Type of Data FieldName, Data Type, Definition are in file : DPW_DataDictionary_Mobile-Food-Schedule.pdf
+
+Link to data source : https://data.sfgov.org/Economy-and-Community/Mobile-Food-Schedule/jjew-r69b/about_data
+
+
+
+First starting out by cleaning the Mobile_Food_Facility_Permit_20250317.csv dataset using panda 
+libary as helper. Remove any empty space in FacilityType, LocationDescription, cnn, Latitude, Longitude. 
+Convert Latitude,Longitude, cnn into numeric first before removing empty row. Cleaning out any white space 
+in Applicant and Facility as well as making it into tile type. Saving the new file into Cleaned_Mobile_Food_Facility_Permit.csv. 
+
+
+Mobile_Food_Facility_Permit_20250317.csv and Clean_FooTruck.py must be in the same folder. 
+
+Run cmd at folder location in Linux or Ubuntu as:
+
+python3 Clean_FoodTruck.py
+
+The result print 20 rows before the dataset is clean and print 20 row after dataset is clean
+and save as Cleaned_Mobile_Food_Facility_Permit.csv. Cleaned_Mobile_Food_Facility_Permit.csv 
+are created if the file are not there before which will be use for the second and third parts. 
+
+
+
+
+Second part is doing RandomForestClassifier on Cleaned_Mobile_Food_Facility_Permit.csv dataset
+we could predict what kind of truck vandors will going to use. 
+We will be using Latitude, Longitude, permit, LocationDescription, FoodItems as our input to
+output our target FacilityType. Covert permit, LocationDescription, FoodItems into string first
+before endcoding into traning set. We are using 40% for testing and train 60% of selected dataset
+due to the small amount of data Push Cart have.
+Using RandomForestClassifier tree as n = 9. Display acurracy resulta as well as a tree diagram.
+
+How RandomForestClassifier find out if it a Truck or Push Cart by using model of: 
+ If Latitude <= 37.78 then move left path if True otherwise False more right path
+ If FoodItems <= 132 then move left else move right
+ If Permit <= 24.50 move left else move right
+ If Logitude <= -122.42 move left else move else move right 
+
+ class decision if is Truck or Push Cart
+
+Node Tree contains : Latitude, Longitude, gini, samples, value, class
+
+Files in order to run Second parts are: Truck_Type.py and Cleaned_Mobile_Food_Facility_Permit.csv
+
+Open cmd and run cmd inside folder by using : 
+
+python3 Truck_Type.py
+
+RESULT will show after Tree graph are closed. 
+
+
+
+Third part is Food cluster base on FoodItems in Cleaned_Mobile_Food_Facility_Permit.csv. 
+This will help new vandors know what types of food over vandors are selling out there as well 
+as how many differnt food are they sell. Let start by drop out any missing value in FoodItems column then setting all the foods name into lower case as well remove special character before split the food name. Count the food in each clusters basic on the name that pop up in each cluster. K = 4 cluster are as KMean. Picking to 10 of the most counted foods in each clusters and print it in cmd. Make a Cluster Scatter plot show the most different cluster group also how many different types of food each vandors sell thier food. 
+
+Files in order to run Second parts are: Food_Type.py and Cleaned_Mobile_Food_Facility_Permit.csv
+
+Open cmd and run cmd inside folder by using : 
+
+python3 Food_Type.py
+
+
+
+
+
+
+
+
+
